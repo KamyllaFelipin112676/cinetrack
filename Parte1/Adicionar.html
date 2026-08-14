@@ -10,11 +10,12 @@
 
     <h1>Adicionar filme</h1>
 
+    <form id="form-filme">
         <label for="Título">Título</label><br>
             <input id="Título" type="text"required><br><br>
 
         <label for="Ano">Ano</label><br>
-            <input id="Ano" type="number"required><br><br>
+            <input id="Ano" type="number" min="1888" max="2030" required><br><br>
 
         <label for="Gênero">Gênero</label><br>
             <input id="Gênero" type="text"required><br><br>
@@ -35,8 +36,10 @@
         <label for="Comentário">Comentário</label><br>
             <textarea id="Comentário" rows="6" cols="30"></textarea><br><br>
 
-    <button type="submit">Salvar</button>
-    <button type="reset">Cancelar</button>
+    </form>
+
+    <button type="submit" form="form-filme">Salvar</button>
+    <button type="button" form="form-filme">Cancelar</button>
 
 
 
