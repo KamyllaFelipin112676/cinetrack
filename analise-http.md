@@ -1,4 +1,4 @@
-1. Método, URL e Código de Status:
+1. Metodo, URL e Codigo de Status:
     Request URL: https://developer.mozilla.org/pt-BR/
     Request Method: GET
     Status Code: 304 Not Modified
@@ -25,5 +25,5 @@ c. Imagem:
     Request Method: GET
     Status Code: 404 Not Found
 
-4. Site Dinâmico:
+4. Site Dinamico:
     
