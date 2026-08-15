@@ -26,4 +26,9 @@ c. Imagem:
     Status Code: 404 Not Found
 
 4. Site Dinamico:
-    
+    Request URL: https://meet.google.com/meetsw.js_data?_reqid=60051&rt=j
+    Request Method: GET
+    Status Code: 200 OK
+
+5. Comparação:
+    Por  conta de ainda não realisado a atividade de introdução completa, deixo em aberto essa questão para resulução em Commit's futuros.
