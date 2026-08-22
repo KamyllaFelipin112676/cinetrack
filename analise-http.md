@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 1. Metodo, URL e Codigo de Status:
+=======
+1. Método, URL e Código de Status:
+>>>>>>> Stashed changes
     Request URL: https://developer.mozilla.org/pt-BR/
     Request Method: GET
     Status Code: 304 Not Modified
@@ -25,6 +29,7 @@ c. Imagem:
     Request Method: GET
     Status Code: 404 Not Found
 
+<<<<<<< Updated upstream
 4. Site Dinamico:
     Request URL: https://meet.google.com/meetsw.js_data?_reqid=60051&rt=j
     Request Method: GET
@@ -32,3 +37,7 @@ c. Imagem:
 
 5. Comparação:
     Por  conta de ainda não realisado a atividade de introdução completa, deixo em aberto essa questão para resulução em Commit's futuros.
+=======
+4. Site Dinâmico:
+    
+>>>>>>> Stashed changes
