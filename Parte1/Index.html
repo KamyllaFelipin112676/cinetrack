@@ -1,43 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineTrack</title>
 </head>
 <body>
-    <a href="Adicionar.html">+ Adicionar filme</a>
-    
-    <h1>CineTrack</h1>
-        <p><strong>CineTrack</strong> é seu gerenciador pessoal de filmes: registre o que já viu, o que está vendo e o que quer ver.</p>
+    <header>
+        <h1>CineTrack</h1>
+    </header>
 
-    <h2>Status possíveis</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adicionar.html">Adicionar Filme</a></li>
+        </ul>
+    </nav>
 
-    <ul>
-        <li>Assistido</li>
-        <li>Assistindo</li>
-        <li>Quero assistir</li>
-    </ul>
+    <aria-label="Buscar Filme">
+        <input type="text" class="caixa-texto" placeholder="Buscar filme">
+        <button type="submit" class="botao-adicionar">+ Adicionar</button><br>
+    </aria-label>
 
-    <h2>Meus filmes favoritos</h2>
+    <button type="button" class="botao-ativo">Todos</button>
+    <button type="button" class="botao-inativo">Assistido</button>
+    <button type="button" class="botao-inativo">Assistindo</button>
+    <button type="button" class="botao-inativo">Quero assistir</button>
 
-    <ol>
-        <li>Divertidamente</li>
-        <li>Meu Malvado Favorito</li>
-        <li>Alice no País das Maravilhas</li>
-    </ol>
+    <main>
+        <section id="lista" aria-live="polite">
+            <article class="card">
+                <img alt="Poster do filme A Origem" width="200"src="https://www.themoviedb.org/t/p/w600_and_h900_face/9e3Dz7aCANy5aRUQF745IlNloJ1.jpg">
+                <h2>A Origem</h2>
+                <p>2010 • Ficção científica</p>
+                <p>Nota: <span class="estrelas">★★★★★</span></p>
+                <p>Assistido
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
 
-    <fieldset>
-        <legend>Sobre Divertidamente</legend>
-        <div>
-            <p>Diretor:</p>
-            <p>&nbsp;&nbsp;&nbsp;Pete Docter</p>
-            <p>Gênero:</p>
-            <p>&nbsp;&nbsp;&nbsp;Animação, Aventura, Comédia</p>
-            <p>Ano de lançamento:</p>
-            <p>&nbsp;&nbsp;&nbsp;2015</p>
-        </div>
-    </fieldset>
+            <article class="card">
+                <img alt="Poster do filme Parasita" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/igw938inb6Fy0YVcwIyxQ7Lu5FO.jpg">
+                <h2>Parasita</h2>
+                <p>2019 • Suspense</p>
+                <p>Nota: <span class="estrelas">★★★★☆</span></p>
+                <p>Assistido
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
 
-    <p> &copy; 2026 CineTrack.</p>
+            <article class="card">
+                <img alt="Poster do filme O Auto da Compadecida" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/imcOp1kJsCsAFCoOtY5OnPrFbAf.jpgO.jpg">
+                <h2>O Auto da Compadecida</h2>
+                <p>2000 •  Comédia </p>
+                <p>Nota: <span class="estrelas">★★★★★</span></p>
+                <p>Assistido
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
+
+            <article class="card">
+                <img alt="Poster do filme Duna: Parte Dois" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/8LJJjLjAzAwXS40S5mx79PJ2jSs.jpg">
+                <h2>Duna: Parte Dois</h2>
+                <p>2024 • Ficção científica </p>
+                <p>Nota: <span class="estrelas">★★★★☆</span></p>
+                <p>Assistindo
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
+
+            <article class="card">
+                <img alt="Poster do filme Interestelar" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/6ricSDD83BClJsFdGB6x7cM0MFQ.jpg">
+                <h2>Interestelar</h2>
+                <p>2014 • Ficção científica </p>
+                <p>Nota: <span class="estrelas">☆☆☆☆☆</span></p>
+                <p>Quero assistir
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
+
+            <article class="card">
+                <img alt="Poster do filme Cidade de Deus" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/gfnXixcGC060QcG6JPxN6AMdVsq.jpg">
+                <h2>Cidade de Deus</h2>
+                <p>2002 • Crime </p>
+                <p>Nota: <span class="estrelas">☆☆☆☆☆</span></p>
+                <p>Quero assistir
+                <button type="submit">Editar</button>
+                <button type="button">Remover</button><br>
+                </p>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>CineTrack - UEM</p>
+        <a href="adicionar.html">Adicionar Filme</a>
+    </footer>
+
 </body>

@@ -1,0 +1,81 @@
+/*Style CSS*/
+* { box-sizing: border-box;
+margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+body {  
+        font-family: system-ui, sans-serif;
+        color: #780000;
+        background-color: #b7dbf1;
+        line-height: 1.5; 
+}
+
+.botao-adicionar {
+    font: inherit; 
+    cursor: pointer; 
+    color: #fff; 
+    background-color: #780000; 
+    border: none; 
+    padding: 0.5px 10px; 
+    border-radius: 4px;
+}
+
+.estrelas { color: #facd03;}
+
+.botao-ativo {     
+    font: inherit; 
+    cursor: pointer; 
+    color: #fff; 
+    background-color: #003049; 
+    border: none; 
+    padding: 0.5px 10px; 
+    border-radius: 4px; }
+
+.botao-inativo {     
+    font: inherit; 
+    cursor: pointer; 
+    color: #fff; 
+    background-color: #4781a0; 
+    border: none; 
+    padding: 0.2px 10px; 
+    border-radius: 0.5px; }
+
+.botao-salvar {     
+    font: inherit; 
+    cursor: pointer; 
+    color: #fff; 
+    background-color: #33d37b; 
+    border: none; 
+    padding: 0.2px 10px; 
+    border-radius: 0.5px; }
+
+.botao-cancelar {     
+    font: inherit; 
+    cursor: pointer; 
+    color: #fff; 
+    background-color: #df3d3d; 
+    border: none; 
+    padding: 0.2px 10px; 
+    border-radius: 0.5px; }
+
+.caixa-texto { 
+    padding: 8px; 
+    width: 200px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    margin-bottom: 16px; 
+}
+
+header {background-color: #003049; color: #fff; padding: 16px; text-align: center;}
+
+
+img { max-width: 100%; display: block; }
+
+
+.card {
+    button { font: inherit; cursor: pointer; color: #fff; background-color: #003049; border: none; padding: 2px 16px; border-radius: 4px; }
+    padding: 16px; background-color: #4781a0; /* espaço interno */
+    border: 1px solid #ddd; /* borda */
+    border-radius: 8px; /* cantos */
+    box-shadow: 0 1px 4px #0002; /* sombra */
+}

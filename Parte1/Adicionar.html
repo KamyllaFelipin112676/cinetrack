@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar filme - CineTrack</title>
@@ -12,35 +13,33 @@
 
     <form id="form-filme">
         <label for="Título">Título</label><br>
-            <input id="Título" type="text"required><br><br>
+            <input id="Título" class="caixa-texto" type="text"required><br><br>
 
         <label for="Ano">Ano</label><br>
-            <input id="Ano" type="number" min="1888" max="2030" required><br><br>
+            <input id="Ano" class="caixa-texto" type="number" min="1888" max="2030" required><br><br>
 
         <label for="Gênero">Gênero</label><br>
-            <input id="Gênero" type="text"required><br><br>
+            <input id="Gênero" class="caixa-texto" type="text"required><br><br>
 
         <label for="URL">URL do Poster</label><br>
-            <input id="URL" type="text" ><br><br>
+            <input id="URL" class="caixa-texto" type="text" ><br><br>
 
         <label for="Status">Status</label><br>
-            <select id="Status" required>
+            <select id="Status" class="caixa-texto" required>
                 <option value="Assistido">Assistido</option>
                 <option value="Assistindo">Assistindo</option>
                 <option value="Quero assistir">Quero assistir</option>
             </select><br><br>
 
         <label for="Nota">Nota (1 a 5)</label><br>
-            <input id="Nota" type="number" min="1" max="5"><br><br>
+            <input id="Nota" class="caixa-texto" type="number" min="1" max="5"><br><br>
 
         <label for="Comentário">Comentário</label><br>
-            <textarea id="Comentário" rows="6" cols="30"></textarea><br><br>
+            <textarea id="Comentário" class="caixa-texto" rows="6" cols="30"></textarea><br><br>
 
     </form>
 
-    <button type="submit" form="form-filme">Salvar</button>
-    <button type="button" form="form-filme">Cancelar</button>
-
-
+    <button type="submit" class="botao-salvar" form="form-filme">Salvar</button>
+    <button type="button" class="botao-cancelar" form="form-filme">Cancelar</button>
 
 </body>
