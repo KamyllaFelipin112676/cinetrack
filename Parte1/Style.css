@@ -10,72 +10,149 @@ body {
         line-height: 1.5; 
 }
 
-.botao-adicionar {
+/*Style do botão adicionar*/
+.botao-adicionar{
     font: inherit; 
     cursor: pointer; 
     color: #fff; 
-    background-color: #780000; 
-    border: none; 
-    padding: 0.5px 10px; 
-    border-radius: 4px;
+    background-color: var(--cor-primaria, #780000); 
+    border: 1px solid var(--cor-primaria, #780000);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    
 }
 
+/*Style das estrelas de avaliação*/
 .estrelas { color: #facd03;}
 
+/*Style do botão ativo*/
 .botao-ativo {     
     font: inherit; 
     cursor: pointer; 
     color: #fff; 
-    background-color: #003049; 
-    border: none; 
-    padding: 0.5px 10px; 
-    border-radius: 4px; }
+    background-color: var(--cor-primaria, #003049); 
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--cor-primaria, #003049);
+    cursor: pointer;
+}
 
+/*Style do botão inativo*/
 .botao-inativo {     
     font: inherit; 
     cursor: pointer; 
-    color: #fff; 
-    background-color: #4781a0; 
-    border: none; 
-    padding: 0.2px 10px; 
-    border-radius: 0.5px; }
+    color: #003049; 
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--cor-secundaria, #003049);
+    cursor: pointer;
+    background-color: transparent;
+}
 
+/*Style dos botões alterar e remover*/
+.acoes button {     
+    font: inherit; 
+    cursor: pointer; 
+    color: #003049; 
+    padding: 0.5rem 1rem;
+    /*border-radius: 999px;*/
+    border: 1px solid var(--cor-secundaria, #003049);
+    cursor: pointer;
+    background-color: transparent;
+}
+
+/*Style do botão salvar*/
 .botao-salvar {     
     font: inherit; 
     cursor: pointer; 
     color: #fff; 
     background-color: #33d37b; 
     border: none; 
-    padding: 0.2px 10px; 
-    border-radius: 0.5px; }
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid #33d37b;
+    cursor: pointer;
+}
 
+/*Style do botão cancelar*/
 .botao-cancelar {     
     font: inherit; 
     cursor: pointer; 
-    color: #fff; 
+    color: #fff;
     background-color: #df3d3d; 
     border: none; 
-    padding: 0.2px 10px; 
-    border-radius: 0.5px; }
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid #df3d3d;
+    cursor: pointer;
+}
 
+/*Style da caixa de texto*/
 .caixa-texto { 
     padding: 8px; 
-    width: 200px; 
-    border: 1px solid #ccc; 
+    width: 1250px; 
+    border: 0.5rem 1rem solid #ccc; 
     border-radius: 4px; 
     margin-bottom: 16px; 
 }
 
-header {background-color: #003049; color: #fff; padding: 16px; text-align: center;}
+/*Style do cabeçalho*/
+header { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+     
+    background-color: #003049; 
+    color: #fff; 
+    padding: 16px; 
+    text-align: center; }
+
+/*Style da navegação*/
+nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* Style botão ativo */
+nav button.ativo {
+  background-color: var(--cor-primaria, #007bff); /* Substiua pela sua cor primária */
+  color: #ffffff;
+  border-color: var(--cor-primaria, #007bff);
+}
 
 
 img { max-width: 100%; display: block; }
 
+#lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.card .acoes {
+  margin-top: auto; /* Empurra a div de ações para o final do card */
+}
+
 
 .card {
-    button { font: inherit; cursor: pointer; color: #fff; background-color: #003049; border: none; padding: 2px 16px; border-radius: 4px; }
+    /*button { font: inherit; cursor: pointer; color: #fff; background-color: #003049; border: none; padding: 2px 16px; border-radius: 4px; }*/
     padding: 16px; background-color: #4781a0; /* espaço interno */
     border: 1px solid #ddd; /* borda */
     border-radius: 8px; /* cantos */
     box-shadow: 0 1px 4px #0002; /* sombra */
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
