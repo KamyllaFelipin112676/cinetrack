@@ -449,6 +449,7 @@ details ul {
     }
 
     .barra-busca {
+        flex: 0 0 auto; /* em coluna, o flex-basis vira altura */
         max-width: none;
     }
 
