@@ -28,6 +28,8 @@ const FILMES_INICIAIS = [
 /* ---------- Estado da aplicação ---------- */
 
 let filmes = [];
+let filtroStatus = 'todos';
+let termoBusca = '';
 
 /* ---------- Persistência (localStorage) ---------- */
 
@@ -57,6 +59,32 @@ function carregarFilmes() {
 
 function gerarId() {
     return filmes.reduce((maior, filme) => Math.max(maior, filme.id), 0) + 1;
+}
+
+/* ---------- Busca e filtro ---------- */
+
+// Minúsculas e sem acentos, para "duna" encontrar "Duna" e "acao" encontrar "Ação".
+function normalizar(texto) {
+    return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+}
+
+// Combina os dois critérios: status selecionado E título contendo o termo.
+function filmesVisiveis() {
+    const termo = normalizar(termoBusca);
+    return filmes.filter((filme) => {
+        const statusOk = filtroStatus === 'todos' || filme.status === filtroStatus;
+        const tituloOk = normalizar(filme.titulo).includes(termo);
+        return statusOk && tituloOk;
+    });
+}
+
+// Adia a execução até o usuário parar de digitar por `espera` ms.
+function debounce(funcao, espera) {
+    let temporizador;
+    return (...argumentos) => {
+        clearTimeout(temporizador);
+        temporizador = setTimeout(() => funcao(...argumentos), espera);
+    };
 }
 
 /* ---------- Renderização ---------- */
@@ -132,16 +160,32 @@ function criarCard(filme) {
 function renderizar() {
     const lista = document.getElementById('lista');
     const resumo = document.getElementById('resumo');
+    const visiveis = filmesVisiveis();
     lista.replaceChildren();
 
-    if (filmes.length === 0) {
-        lista.appendChild(criarElemento('p', 'vazio', 'Nenhum filme na lista. Clique em “+ Adicionar” para começar.'));
-        resumo.textContent = '';
-        return;
+    if (visiveis.length === 0) {
+        const mensagem = filmes.length === 0
+            ? 'Nenhum filme na lista. Clique em “+ Adicionar” para começar.'
+            : 'Nenhum filme encontrado para essa busca ou filtro.';
+        lista.appendChild(criarElemento('p', 'vazio', mensagem));
+    } else {
+        lista.append(...visiveis.map(criarCard));
     }
 
-    lista.append(...filmes.map(criarCard));
-    resumo.textContent = `${filmes.length} ${filmes.length === 1 ? 'filme' : 'filmes'}`;
+    resumo.textContent = filmes.length === 0
+        ? ''
+        : `Exibindo ${visiveis.length} de ${filmes.length} ${filmes.length === 1 ? 'filme' : 'filmes'}`;
+}
+
+function selecionarFiltro(status) {
+    filtroStatus = status;
+    document.querySelectorAll('.filtros button').forEach((botao) => {
+        const ativo = botao.dataset.status === status;
+        botao.classList.toggle('botao-ativo', ativo);
+        botao.classList.toggle('botao-inativo', !ativo);
+        botao.setAttribute('aria-pressed', String(ativo));
+    });
+    renderizar();
 }
 
 /* ---------- Inicialização ---------- */
@@ -156,6 +200,22 @@ function iniciar() {
         filmes = salvos;
     }
     renderizar();
+
+    const campoBusca = document.getElementById('busca');
+    campoBusca.addEventListener('input', debounce(() => {
+        termoBusca = campoBusca.value;
+        renderizar();
+    }, 250));
+
+    // Enter na busca não deve recarregar a página.
+    document.getElementById('form-busca').addEventListener('submit', (evento) => evento.preventDefault());
+
+    document.querySelector('.filtros').addEventListener('click', (evento) => {
+        const botao = evento.target.closest('button[data-status]');
+        if (botao) {
+            selecionarFiltro(botao.dataset.status);
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', iniciar);
