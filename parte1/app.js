@@ -7,6 +7,14 @@
 const CHAVE_STORAGE = 'cinetrack:filmes';
 const POSTER_PADRAO = 'https://placehold.co/200x300?text=Sem+poster';
 
+const ANO_MIN = 1888;
+const ANO_MAX = 2030;
+const TAMANHO_MAX_TITULO = 120;
+const TAMANHO_MAX_GENERO = 60;
+const TAMANHO_MAX_COMENTARIO = 500;
+
+const CAMPOS_FORMULARIO = ['titulo', 'ano', 'genero', 'poster', 'status', 'nota', 'comentario'];
+
 const ROTULOS_STATUS = {
     assistido: 'Assistido',
     assistindo: 'Assistindo',
@@ -30,6 +38,7 @@ const FILMES_INICIAIS = [
 let filmes = [];
 let filtroStatus = 'todos';
 let termoBusca = '';
+let idEmEdicao = null; // null = o formulário está cadastrando um filme novo
 
 /* ---------- Persistência (localStorage) ---------- */
 
@@ -188,6 +197,187 @@ function selecionarFiltro(status) {
     renderizar();
 }
 
+/* ---------- Formulário (modal) ---------- */
+
+function lerFormulario() {
+    const valor = (id) => document.getElementById(id).value;
+    return {
+        titulo: valor('titulo').trim(),
+        ano: Number(valor('ano')),
+        genero: valor('genero').trim(),
+        poster: valor('poster').trim(),
+        status: valor('status'),
+        nota: Number(valor('nota')),
+        comentario: valor('comentario').trim()
+    };
+}
+
+function urlValida(texto) {
+    try {
+        const url = new URL(texto);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch (erro) {
+        return false;
+    }
+}
+
+// Devolve um objeto { campo: mensagem } apenas com os campos inválidos.
+function validarFilme(dados) {
+    const erros = {};
+
+    if (dados.titulo === '') {
+        erros.titulo = 'Informe o título do filme.';
+    } else if (dados.titulo.length > TAMANHO_MAX_TITULO) {
+        erros.titulo = `O título pode ter no máximo ${TAMANHO_MAX_TITULO} caracteres.`;
+    }
+
+    if (!Number.isInteger(dados.ano) || dados.ano < ANO_MIN || dados.ano > ANO_MAX) {
+        erros.ano = `Informe um ano inteiro entre ${ANO_MIN} e ${ANO_MAX}.`;
+    }
+
+    if (dados.genero === '') {
+        erros.genero = 'Informe o gênero do filme.';
+    } else if (dados.genero.length > TAMANHO_MAX_GENERO) {
+        erros.genero = `O gênero pode ter no máximo ${TAMANHO_MAX_GENERO} caracteres.`;
+    }
+
+    if (dados.poster !== '' && !urlValida(dados.poster)) {
+        erros.poster = 'Informe uma URL válida, começando com http:// ou https://.';
+    }
+
+    if (!Object.hasOwn(ROTULOS_STATUS, dados.status)) {
+        erros.status = 'Selecione um status.';
+    }
+
+    if (!Number.isInteger(dados.nota) || dados.nota < 1 || dados.nota > 5) {
+        erros.nota = 'Informe uma nota inteira de 1 a 5.';
+    }
+
+    if (dados.comentario.length > TAMANHO_MAX_COMENTARIO) {
+        erros.comentario = `O comentário pode ter no máximo ${TAMANHO_MAX_COMENTARIO} caracteres.`;
+    }
+
+    return erros;
+}
+
+function mostrarErro(campo, mensagem) {
+    const entrada = document.getElementById(campo);
+    document.getElementById(`erro-${campo}`).textContent = mensagem;
+    if (mensagem) {
+        entrada.setAttribute('aria-invalid', 'true');
+    } else {
+        entrada.removeAttribute('aria-invalid');
+    }
+}
+
+function limparErros() {
+    CAMPOS_FORMULARIO.forEach((campo) => mostrarErro(campo, ''));
+}
+
+function abrirFormulario(filme) {
+    const modal = document.getElementById('modal');
+    document.getElementById('form-filme').reset();
+    limparErros();
+
+    idEmEdicao = filme ? filme.id : null;
+    document.getElementById('modal-titulo').textContent = filme ? 'Editar filme' : 'Adicionar filme';
+
+    if (filme) {
+        CAMPOS_FORMULARIO.forEach((campo) => {
+            document.getElementById(campo).value = filme[campo];
+        });
+    }
+
+    modal.showModal();
+    document.getElementById('titulo').focus();
+}
+
+function fecharFormulario() {
+    document.getElementById('modal').close();
+}
+
+// Disparado em qualquer fechamento (Salvar, Cancelar ou Esc).
+function aoFecharFormulario() {
+    idEmEdicao = null;
+}
+
+function salvarFormulario(evento) {
+    evento.preventDefault();
+
+    const dados = lerFormulario();
+    const erros = validarFilme(dados);
+    CAMPOS_FORMULARIO.forEach((campo) => mostrarErro(campo, erros[campo] || ''));
+
+    const primeiroComErro = CAMPOS_FORMULARIO.find((campo) => erros[campo]);
+    if (primeiroComErro) {
+        document.getElementById(primeiroComErro).focus();
+        return; // não salva enquanto houver erro
+    }
+
+    const editando = idEmEdicao !== null;
+    let idSalvo;
+    if (editando) {
+        idSalvo = idEmEdicao;
+        filmes = filmes.map((filme) => (filme.id === idSalvo ? { id: idSalvo, ...dados } : filme));
+    } else {
+        idSalvo = gerarId();
+        filmes.push({ id: idSalvo, ...dados });
+    }
+    salvarFilmes();
+
+    // Se a busca ou o filtro escondessem o filme salvo, limpa-os para ele aparecer.
+    if (!filmesVisiveis().some((filme) => filme.id === idSalvo)) {
+        termoBusca = '';
+        document.getElementById('busca').value = '';
+        selecionarFiltro('todos'); // já renderiza
+    } else {
+        renderizar();
+    }
+
+    fecharFormulario();
+
+    // Os cards foram recriados: o foco volta para um elemento que ainda existe.
+    const alvoFoco = editando
+        ? document.querySelector(`button[data-acao="editar"][data-id="${idSalvo}"]`)
+        : document.getElementById('btn-adicionar');
+    if (alvoFoco) {
+        alvoFoco.focus();
+    }
+}
+
+/* ---------- Remoção e ações dos cards ---------- */
+
+function removerFilme(id) {
+    const filme = filmes.find((item) => item.id === id);
+    if (!filme) {
+        return;
+    }
+    if (!window.confirm(`Remover "${filme.titulo}" da sua lista?`)) {
+        return;
+    }
+    filmes = filmes.filter((item) => item.id !== id);
+    salvarFilmes();
+    renderizar();
+    document.getElementById('busca').focus();
+}
+
+// Delegação de eventos: continua valendo para os cards recriados a cada renderização.
+function tratarCliqueNaLista(evento) {
+    const botao = evento.target.closest('button[data-acao]');
+    if (!botao) {
+        return;
+    }
+    const id = Number(botao.dataset.id);
+    if (botao.dataset.acao === 'editar') {
+        const filme = filmes.find((item) => item.id === id);
+        if (filme) {
+            abrirFormulario(filme);
+        }
+    } else if (botao.dataset.acao === 'remover') {
+        removerFilme(id);
+    }
+}
+
 /* ---------- Inicialização ---------- */
 
 function iniciar() {
@@ -209,6 +399,24 @@ function iniciar() {
 
     // Enter na busca não deve recarregar a página.
     document.getElementById('form-busca').addEventListener('submit', (evento) => evento.preventDefault());
+
+    // Os limites do ano ficam definidos em um só lugar (constantes acima).
+    const campoAno = document.getElementById('ano');
+    campoAno.min = ANO_MIN;
+    campoAno.max = ANO_MAX;
+
+    const modal = document.getElementById('modal');
+    document.getElementById('btn-adicionar').addEventListener('click', () => abrirFormulario(null));
+    document.getElementById('btn-cancelar').addEventListener('click', fecharFormulario);
+    document.getElementById('form-filme').addEventListener('submit', salvarFormulario);
+    // Disparado ao fechar por Salvar, Cancelar ou Esc (o <dialog> trata o Esc nativamente).
+    modal.addEventListener('close', aoFecharFormulario);
+    document.getElementById('lista').addEventListener('click', tratarCliqueNaLista);
+
+    // Some com a mensagem de erro assim que o usuário corrige o campo.
+    CAMPOS_FORMULARIO.forEach((campo) => {
+        document.getElementById(campo).addEventListener('input', () => mostrarErro(campo, ''));
+    });
 
     document.querySelector('.filtros').addEventListener('click', (evento) => {
         const botao = evento.target.closest('button[data-status]');
