@@ -1,120 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CineTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
+    <a class="pular-conteudo" href="#lista">Pular para a lista de filmes</a>
+
     <header>
         <h1>CineTrack</h1>
-        <aria-label="Buscar Filme">
-            <input type="text" class="caixa-texto" placeholder="Buscar filme">
-            <button type="submit" class="botao-adicionar">+ Adicionar</button><br>
-    </aria-label>
+
+        <form class="barra-busca" role="search" id="form-busca">
+            <label for="busca" class="somente-leitor">Buscar filme por título</label>
+            <input type="search" id="busca" class="caixa-texto" placeholder="Buscar filme" autocomplete="off">
+            <button type="button" id="btn-adicionar" class="botao-adicionar">+ Adicionar</button>
+        </form>
     </header>
 
-    <nav>
+    <nav aria-label="Navegação principal">
         <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="adicionar.html">Adicionar Filme</a></li>
+            <li><a href="index.html" aria-current="page">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
         </ul>
     </nav>
 
-    
-
-    <button type="button" class="botao-ativo">Todos</button>
-    <button type="button" class="botao-inativo">Assistido</button>
-    <button type="button" class="botao-inativo">Assistindo</button>
-    <button type="button" class="botao-inativo">Quero assistir</button>
-
     <main>
-        <section id="lista" aria-live="polite">
-            <article class="card">
-                <img alt="Poster do filme A Origem" width="200"src="https://www.themoviedb.org/t/p/w600_and_h900_face/9e3Dz7aCANy5aRUQF745IlNloJ1.jpg">
-                <h2>A Origem</h2>
-                <p>2010 • Ficção científica</p>
-                <p>Nota: <span class="estrelas">★★★★★</span></p>
-                <p>Assistido
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
+        <div class="filtros" role="group" aria-label="Filtrar por status">
+            <button type="button" class="botao-ativo" data-status="todos" aria-pressed="true">Todos</button>
+            <button type="button" class="botao-inativo" data-status="assistido" aria-pressed="false">Assistido</button>
+            <button type="button" class="botao-inativo" data-status="assistindo" aria-pressed="false">Assistindo</button>
+            <button type="button" class="botao-inativo" data-status="quero" aria-pressed="false">Quero assistir</button>
+        </div>
 
-            <article class="card">
-                <img alt="Poster do filme Parasita" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/igw938inb6Fy0YVcwIyxQ7Lu5FO.jpg">
-                <h2>Parasita</h2>
-                <p>2019 • Suspense</p>
-                <p>Nota: <span class="estrelas">★★★★☆</span></p>
-                <p>Assistido
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
+        <p id="resumo" class="resumo" role="status"></p>
 
-            <article class="card">
-                <img alt="Poster do filme O Auto da Compadecida" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/imcOp1kJsCsAFCoOtY5OnPrFbAf.jpgO.jpg">
-                <h2>O Auto da Compadecida</h2>
-                <p>2000 •  Comédia </p>
-                <p>Nota: <span class="estrelas">★★★★★</span></p>
-                <p>Assistido
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
-
-            <article class="card">
-                <img alt="Poster do filme Duna: Parte Dois" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/8LJJjLjAzAwXS40S5mx79PJ2jSs.jpg">
-                <h2>Duna: Parte Dois</h2>
-                <p>2024 • Ficção científica </p>
-                <p>Nota: <span class="estrelas">★★★★☆</span></p>
-                <p>Assistindo
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
-
-            <article class="card">
-                <img alt="Poster do filme Interestelar" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/6ricSDD83BClJsFdGB6x7cM0MFQ.jpg">
-                <h2>Interestelar</h2>
-                <p>2014 • Ficção científica </p>
-                <p>Nota: <span class="estrelas">☆☆☆☆☆</span></p>
-                <p>Quero assistir
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
-
-            <article class="card">
-                <img alt="Poster do filme Cidade de Deus" width="200" src="https://www.themoviedb.org/t/p/w600_and_h900_face/gfnXixcGC060QcG6JPxN6AMdVsq.jpg">
-                <h2>Cidade de Deus</h2>
-                <p>2002 • Crime </p>
-                <p>Nota: <span class="estrelas">☆☆☆☆☆</span></p>
-                <p>Quero assistir
-                <div class="acoes">
-                    <button type="submit">Editar</button>
-                    <button type="button">Remover</button><br>
-                </div>
-                </p>
-            </article>
-
+        <section id="lista" aria-label="Lista de filmes">
+            <!-- Os cards são gerados pelo app.js a partir dos dados. -->
         </section>
     </main>
 
+    <dialog id="modal" aria-labelledby="modal-titulo">
+        <form id="form-filme">
+            <h2 id="modal-titulo">Adicionar filme</h2>
+
+            <div class="campo">
+                <label for="titulo">Título</label>
+                <input id="titulo" name="titulo" class="caixa-texto" type="text" required maxlength="120" aria-describedby="erro-titulo">
+                <p class="erro" id="erro-titulo" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="ano">Ano</label>
+                <input id="ano" name="ano" class="caixa-texto" type="number" min="1888" max="2030" required aria-describedby="erro-ano">
+                <p class="erro" id="erro-ano" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="genero">Gênero</label>
+                <input id="genero" name="genero" class="caixa-texto" type="text" required maxlength="60" aria-describedby="erro-genero">
+                <p class="erro" id="erro-genero" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="poster">URL do pôster (opcional)</label>
+                <input id="poster" name="poster" class="caixa-texto" type="text" inputmode="url" placeholder="https://..." aria-describedby="erro-poster">
+                <p class="erro" id="erro-poster" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="status">Status</label>
+                <select id="status" name="status" class="caixa-texto" required aria-describedby="erro-status">
+                    <option value="assistido">Assistido</option>
+                    <option value="assistindo">Assistindo</option>
+                    <option value="quero">Quero assistir</option>
+                </select>
+                <p class="erro" id="erro-status" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="nota">Nota (1 a 5)</label>
+                <input id="nota" name="nota" class="caixa-texto" type="number" min="1" max="5" step="1" required aria-describedby="erro-nota">
+                <p class="erro" id="erro-nota" role="alert"></p>
+            </div>
+
+            <div class="campo">
+                <label for="comentario">Comentário (opcional)</label>
+                <textarea id="comentario" name="comentario" class="caixa-texto" rows="4" maxlength="500" aria-describedby="erro-comentario"></textarea>
+                <p class="erro" id="erro-comentario" role="alert"></p>
+            </div>
+
+            <div class="acoes-form">
+                <button type="submit" class="botao-salvar">Salvar</button>
+                <button type="button" class="botao-cancelar" id="btn-cancelar">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
     <footer>
         <p>CineTrack - UEM</p>
-        <a href="Sobre.html">Sobre - Cinetrack</a>
+        <a href="sobre.html">Sobre - CineTrack</a>
     </footer>
-
 </body>
+</html>
