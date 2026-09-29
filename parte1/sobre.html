@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - CineTrack</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -12,14 +12,28 @@
         <h1>Sobre o CineTrack</h1>
     </header>
 
+    <nav aria-label="Navegação principal">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <a href="index.html">← Voltar</a>
+        <section>
+            <h2>O que é o CineTrack</h2>
+            <p>
+                O CineTrack é um gerenciador pessoal de listas de filmes: você registra o que já
+                assistiu, o que está assistindo e o que quer assistir, dá uma nota de 1 a 5 estrelas
+                e deixa um comentário. Os dados ficam salvos no próprio navegador.
+            </p>
+        </section>
 
         <section>
-            <h2>Filmes do CineTrack</h2>
+            <h2>Filmes de exemplo</h2>
 
             <table>
-                <caption>Conjunto de filmes do CineTrack</caption>
+                <caption>Filmes carregados na primeira visita</caption>
 
                 <thead>
                     <tr>
@@ -37,39 +51,34 @@
                         <td>Ficção científica</td>
                         <td>Assistido</td>
                     </tr>
-
                     <tr>
                         <td>Parasita</td>
                         <td>2019</td>
                         <td>Suspense</td>
                         <td>Assistido</td>
                     </tr>
-
                     <tr>
                         <td>O Auto da Compadecida</td>
                         <td>2000</td>
                         <td>Comédia</td>
                         <td>Assistido</td>
                     </tr>
-
                     <tr>
                         <td>Duna: Parte Dois</td>
                         <td>2024</td>
                         <td>Ficção científica</td>
                         <td>Assistindo</td>
                     </tr>
-
                     <tr>
                         <td>Interestelar</td>
                         <td>2014</td>
                         <td>Ficção científica</td>
                         <td>Quero assistir</td>
                     </tr>
-
                     <tr>
                         <td>Cidade de Deus</td>
                         <td>2002</td>
-                        <td>Crime</td>
+                        <td>Drama</td>
                         <td>Quero assistir</td>
                     </tr>
                 </tbody>
@@ -81,12 +90,12 @@
 
             <figure>
                 <img
-                    src="cinetrack/Docs/rascunho-tela.jpeg"
+                    src="../docs/rascunho-tela.jpeg"
                     alt="Rascunho da tela principal do CineTrack mostrando a organização da interface"
                 >
                 <figcaption>
                     O desenho mostra um rascunho da tela principal do CineTrack,
-                    incluindo busca, lista, os detalhes dos filmes
+                    incluindo busca, filtros, a lista de filmes em cards
                     e as principais ações disponíveis na interface.
                 </figcaption>
             </figure>
@@ -100,12 +109,12 @@
 
                 <ul>
                     <li>Título</li>
-                    <li>Gênero</li>
                     <li>Ano de lançamento</li>
-                    <li>Diretor</li>
-                    <li>Duração</li>
-                    <li>Status</li>
-                    <li>Nota</li>
+                    <li>Gênero</li>
+                    <li>Pôster (URL da imagem de capa)</li>
+                    <li>Nota (de 1 a 5 estrelas)</li>
+                    <li>Status (assistido, assistindo ou quero assistir)</li>
+                    <li>Comentário (opcional)</li>
                 </ul>
             </details>
         </section>
@@ -113,7 +122,7 @@
 
     <footer>
         <p>CineTrack - UEM</p>
-        <a href="adicionar.html">Adicionar Filme</a>
+        <a href="index.html">Voltar para a lista</a>
     </footer>
 </body>
 </html>
