@@ -1,4 +1,16 @@
+# Dependências e builds
 node_modules/
+dist/
+
+# Variáveis de ambiente (segredos). Apenas os arquivos de exemplo são versionados.
+.env
+.env.*
+!.env.example
+
+# Arquivos temporários de escrita do backend
+*.tmp
+
+# Sistema e editores
 .DS_Store
 Thumbs.db
 *.log
