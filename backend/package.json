@@ -1,0 +1,17 @@
+{
+  "name": "cinetrack-backend",
+  "version": "2.0.0",
+  "description": "API REST do CineTrack (Node.js + mini-express, persistência em JSON)",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node seed.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}
